@@ -1,103 +1,240 @@
 import Image from "next/image";
+import styles from './page.module.css';
+
+const productos = [
+  { id: 1, nombre: "Camiseta", precio: 25, categoria: { id: 1, nombre: "Ropa" } },
+  { id: 2, nombre: "Zapatos deportivos", precio: 60, categoria: { id: 2, nombre: "Calzado" } },
+  { id: 3, nombre: "Gorra", precio: 15, categoria: { id: 1, nombre: "Ropa" } },
+  { id: 4, nombre: "Pantalón", precio: 40, categoria: { id: 1, nombre: "Ropa" } },
+  { id: 5, nombre: "Bolso", precio: 30, categoria: { id: 3, nombre: "Accesorios" } },
+];
+
+const usuarios = [
+  { id: 1, nombre: "Ana", direccion: { calle: "Calle 10", ciudad: "Bogotá", pais: "Colombia" } },
+  { id: 2, nombre: "Luis", direccion: { calle: "Av. Reforma", ciudad: "Ciudad de México", pais: "México" } },
+  { id: 3, nombre: "Marta", direccion: { calle: "Gran Vía", ciudad: "Madrid", pais: "España" } },
+  { id: 4, nombre: "John", direccion: { calle: "Main St", ciudad: "New York", pais: "USA" } },
+  { id: 5, nombre: "Pedro", direccion: { calle: "Rua Augusta", ciudad: "Lisboa", pais: "Portugal" } },
+];
+
+const cursos = [
+  { id: 1, nombre: "React", modulos: [{ nombre: "Componentes" }, { nombre: "Hooks" }] },
+  { id: 2, nombre: "Next.js", modulos: [{ nombre: "SSR" }, { nombre: "Static Props" }] },
+  { id: 3, nombre: "Node.js", modulos: [{ nombre: "Express" }, { nombre: "Middlewares" }] },
+  { id: 4, nombre: "Django", modulos: [{ nombre: "Modelos" }, { nombre: "Templates" }] },
+  { id: 5, nombre: "Flutter", modulos: [{ nombre: "Widgets" }, { nombre: "State Management" }] },
+];
+
+const pedidos = [
+  { id: 1, cliente: "Ana", productos: [{ nombre: "Camiseta", cantidad: 2 }, { nombre: "Gorra", cantidad: 1 }] },
+  { id: 2, cliente: "Luis", productos: [{ nombre: "Zapatos", cantidad: 1 }, { nombre: "Bolso", cantidad: 2 }] },
+  { id: 3, cliente: "Marta", productos: [{ nombre: "Pantalón", cantidad: 3 }] },
+  { id: 4, cliente: "John", productos: [{ nombre: "Sudadera", cantidad: 1 }, { nombre: "Gorra", cantidad: 2 }] },
+  { id: 5, cliente: "Pedro", productos: [{ nombre: "Camiseta", cantidad: 5 }] },
+];
+
+const blogs = [ 
+{ 
+id: 1, 
+titulo: "Aprendiendo React", 
+autor: { nombre: "Ana", pais: "Colombia" }, 
+categorias: ["JavaScript", "Frontend"], 
+comentarios: [ 
+      { 
+        usuario: "Luis", 
+        texto: "Muy útil", 
+        respuestas: [ 
+          { 
+            usuario: "Marta", 
+            texto: "Totalmente de acuerdo", 
+            reacciones: [ 
+              { tipo: "like", usuario: { nombre: "Pedro", rol: "Estudiante" } }, 
+              { tipo: "love", usuario: { nombre: "John", rol: "Desarrollador" } } 
+            ] 
+          } 
+        ] 
+      } 
+    ] 
+  }, 
+  { 
+    id: 2, 
+    titulo: "Next.js SSR", 
+    autor: { nombre: "Luis", pais: "México" }, 
+    categorias: ["JavaScript", "SSR"], 
+    comentarios: [ 
+      { 
+        usuario: "Marta", 
+        texto: "Interesante", 
+        respuestas: [ 
+          { 
+            usuario: "Ana", 
+            texto: "Lo probaré", 
+            reacciones: [ 
+              { tipo: "like", usuario: { nombre: "Luis", rol: "Frontend Dev" } } 
+            ] 
+          } 
+        ] 
+      } 
+    ] 
+  }, 
+  { 
+    id: 3, 
+    titulo: "Node.js API", 
+    autor: { nombre: "John", pais: "USA" }, 
+    categorias: ["Backend", "API"], 
+    comentarios: [ 
+      { 
+        usuario: "Pedro", 
+        texto: "Me sirvió mucho", 
+        respuestas: [ 
+          { 
+            usuario: "Luis", 
+            texto: "Gracias por compartir", 
+            reacciones: [ 
+              { tipo: "clap", usuario: { nombre: "Ana", rol: "Fullstack Dev" } } 
+            ] 
+          } 
+        ] 
+      } 
+    ] 
+  }, 
+  { 
+    id: 4, 
+    titulo: "Django ORM", 
+    autor: { nombre: "Marta", pais: "España" }, 
+    categorias: ["Backend", "Python"], 
+    comentarios: [ 
+      { 
+        usuario: "Ana", 
+        texto: "Claro y conciso", 
+        respuestas: [ 
+          { 
+            usuario: "John", 
+            texto: "Lo usaré en mi proyecto", 
+            reacciones: [ 
+              { tipo: "like", usuario: { nombre: "Luis", rol: "Backend Dev" } } 
+            ] 
+          } 
+        ] 
+      } 
+    ] 
+  }, 
+  { 
+    id: 5, 
+    titulo: "Flutter Widgets", 
+    autor: { nombre: "Pedro", pais: "Portugal" }, 
+    categorias: ["Mobile", "UI"], 
+    comentarios: [ 
+      { 
+        usuario: "Luis", 
+        texto: "Genial explicación", 
+        respuestas: [ 
+          { 
+            usuario: "Marta", 
+            texto: "Muy claro todo", 
+            reacciones: [ 
+              { tipo: "love", usuario: { nombre: "Ana", rol: "UI Designer" } } 
+            ] 
+          } 
+        ] 
+      } 
+    ] 
+  } 
+]; 
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
+    return (
+    <div>
+      <h2>🛍️ Lista de Productos</h2>
+      <ul>
+        {productos.map((producto) => (
+          <li key={producto.id}>
+            <strong>{producto.nombre}</strong> - ${producto.precio}  
+            <br />
+            <em>Categoría:</em> {producto.categoria.nombre}
           </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+        ))}
+      </ul>
+<br />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <h2>👥 Lista de Usuarios</h2>
+      <ul>
+        {usuarios.map((usuario) => (
+          <li key={usuario.id}>
+            <strong>{usuario.nombre}</strong>
+            <br />
+            Dirección: {usuario.direccion.calle}, {usuario.direccion.ciudad}, {usuario.direccion.pais}
+          </li>
+        ))}
+      </ul>
+<br />
+<h2>📚 Lista de Cursos</h2>
+      <ul>
+        {cursos.map((curso) => (
+          <li key={curso.id}>
+            <strong>{curso.nombre}</strong>
+            <ul>
+              {curso.modulos.map((modulo, index) => (
+                <li key={index}>🧩 {modulo.nombre}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+<br />
+<h2>🛒 Lista de Pedidos</h2>
+      <ul>
+        {pedidos.map((pedido) => (
+          <li key={pedido.id}>
+            <strong>Cliente:</strong> {pedido.cliente}
+            <ul>
+              {pedido.productos.map((producto, index) => (
+                <li key={index}>
+                  🧺 {producto.nombre} — <em>{producto.cantidad} unidad(es)</em>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+        <br />
+    <h2>📝 Lista de Blogs</h2>
+      <ul>
+        {blogs.map((blog) => (
+          <li key={blog.id}>
+            <h3>{blog.titulo}</h3>
+            <p><strong>Autor:</strong> {blog.autor.nombre} ({blog.autor.pais})</p>
+            <p><strong>Categorías:</strong> {blog.categorias.join(", ")}</p>
+
+            <h4>💬 Comentarios:</h4>
+            <ul>
+              {blog.comentarios.map((comentario, i) => (
+                <li key={i}>
+                  <p><strong>{comentario.usuario}:</strong> {comentario.texto}</p>
+
+                  <h5>↪️ Respuestas:</h5>
+                  <ul>
+                    {comentario.respuestas.map((respuesta, j) => (
+                      <li key={j}>
+                        <p><strong>{respuesta.usuario}:</strong> {respuesta.texto}</p>
+
+                        <h6>🎯 Reacciones:</h6>
+                        <ul>
+                          {respuesta.reacciones.map((reaccion, k) => (
+                            <li key={k}>
+                              {reaccion.tipo} por <strong>{reaccion.usuario.nombre}</strong> ({reaccion.usuario.rol})
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -1,0 +1,48 @@
+/* page.module.css */
+.blogContainer {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.blogItem {
+  border: 1px solid #ddd;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.titulo {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.autor {
+  font-style: italic;
+  color: #666;
+}
+
+.categorias {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #0070f3;
+}
+
+.comentario {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid #ccc;
+}
+
+.respuesta {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  border-left: 2px dashed #aaa;
+}
+
+.reaccion {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: #444;
+}
